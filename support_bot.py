@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+🤖 ПРОМЕТЕЙ ПОДДЕРЖКА — Бот для пожертвований
+Просто показывает ссылки. Без автоматизации.
+🔐 Создано: БАТЕНЬКА
+"""
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes
 
-TOKEN = "ТВОЙ_ТОКЕН_ОТ_BOTFATHER"
+# ▼▼▼ ТОКЕН ОТ @BotFather ▼▼▼
+TOKEN = "8775685520:AAEkuvkXhCEAFO48fR1sOPwK0q9BivjFQws"
+# ▲▲▲ ▲▲▲ ▲▲▲
 
 # ▼▼▼ ССЫЛКИ ЮMONEY ▼▼▼
 LINK_BASIC = "https://yoomoney.ru/fundraise/1GGC4QUKOLT.260314"
@@ -34,6 +41,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-app = Application.builder().token(8775685520:AAEkuvkXhCEAFO48fR1sOPwK0q9BivjFQws).build()
-app.add_handler(CommandHandler("start", start))
-app.run_polling()
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "Это бот поддержки проекта Prometheus Lab.\n"
+        "Нажмите /start чтобы увидеть продукты."
+    )
+
+def main():
+    app = Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("help", help_command))
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
+
+if __name__ == "__main__":
+    main()
