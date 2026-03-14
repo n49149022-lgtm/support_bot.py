@@ -34,6 +34,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-app = Application.builder().token(TOKEN).build()
+app = Application.builder().token(8775685520:AAEkuvkXhCEAFO48fR1sOPwK0q9BivjFQws).build()
 app.add_handler(CommandHandler("start", start))
 app.run_polling()
